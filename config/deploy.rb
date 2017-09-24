@@ -95,6 +95,18 @@ namespace :deploy do
     end
   end
 
+  desc 'Upload database.yml and secrets.yml'
+  task :upload do
+    on roles(:app) do |host|
+      if test "[ ! -d #{shared_path}/config ]"
+        execute "mkdir -p #{shared_path}/config"
+      end
+      upload!('config/database.yml', "#{shared_path}/config/database.yml")
+      upload!('config/secrets.yml', "#{shared_path}/config/secrets.yml")
+    end
+  end
+
+  before :starting,     :upload
   before :starting,     :check_revision
   after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
