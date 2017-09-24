@@ -10,6 +10,11 @@ set :repo_url, "https://github.com/guppy0356/cap-rails.git"
 set :user,            'deploy'
 set :use_sudo,        false
 
+# server
+set :stage,           :production
+set :deploy_via,      :remote_cache
+set :deploy_to,       "/var/www/rails/#{fetch(:application)}"
+
 # puma
 set :puma_threads,    [4, 16]
 set :puma_workers,    0
@@ -24,11 +29,6 @@ set :puma_init_active_record, true
 
 # terminal
 set :pty,             true
-
-# server
-set :stage,           :production
-set :deploy_via,      :remote_cache
-set :deploy_to,       "/var/www/rails/#{fetch(:application)}"
 
 # ssh
 set :ssh_options,     {
