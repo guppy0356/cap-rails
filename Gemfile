@@ -58,3 +58,6 @@ gem 'puma'
 group :production do
   gem 'pg'
 end
+
+gem 'less-rails'
+gem 'twitter-bootstrap-rails'
